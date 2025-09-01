@@ -1,0 +1,24 @@
+---
+packages:
+  common:
+    - { name: 'zsh' }
+    - { name: 'git' }
+    - { name: 'neovim' }
+    - { name: 'tmux' }
+    - { name: 'btop' }
+    - { name: 'python' }
+    - { name: 'uv' }
+    - { name: 'lua' }
+    - { name: 'go' }
+    - { name: 'node' }
+    - { name: 'ripgrep' }
+    - { name: 'ruff' }
+    - { name: 'ghostty', cask: true }
+    - { name: 'spotify', cask: true }
+    - { name: 'firefox', cask: true }
+
+  macos:
+    - { name: 'nikitabobko/tap/aerospace', cask: true }
+
+  linux: []
+

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ssh -p 32780 -i ~/.ssh/mert_laconic_id -o ServerAliveInterval=60 -o ServerAliveCountMax=10 mert25acar@llm.droidcraft.org

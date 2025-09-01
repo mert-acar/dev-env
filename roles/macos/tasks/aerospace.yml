@@ -1,0 +1,14 @@
+---
+- name: ensure aerospace config directory exists
+  tags: aerospace_config
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/aerospace"
+    state: directory
+    mode: '0755'
+
+- name: sync aerospace configuration files
+  tags: aerospace_config
+  copy:
+    src: aerospace/
+    dest: "{{ lookup('env', 'HOME') }}/.config/aerospace/"
+    mode: '0644'

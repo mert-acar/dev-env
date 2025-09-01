@@ -1,0 +1,4 @@
+---
+- name: Include homebrew setup tasks
+  include_tasks: homebrew.yml
+  tags: homebrew

@@ -1,0 +1,85 @@
+---
+- name: Find zsh path
+  tags: zsh
+  command: which zsh
+  register: zsh_path
+  changed_when: false
+  check_mode: no
+
+- name: Set zsh as default shell
+  tags: zsh
+  become: true
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    shell: "{{ zsh_path.stdout }}"
+  when: zsh_path.stdout is defined and zsh_path.stdout != ''
+
+- name: Copy zshrc configuration
+  tags: zsh_config
+  copy:
+    src: zshrc
+    dest: "{{ lookup('env', 'HOME') }}/.zshrc"
+    mode: '0644'
+    backup: yes
+
+# om-my-zsh config
+- name: Check if oh-my-zsh is installed
+  tags: zsh
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+  register: oh_my_zsh_installed
+
+- name: Install oh-my-zsh
+  tags: zsh
+  shell:
+    cmd: 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
+
+- name: Install zsh-syntax-highlighting
+  tags: zsh
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    update: yes
+
+- name: Install zsh-autosuggestions
+  tags: zsh
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    update: yes
+
+- name: Add omz lines to zshrc
+  tags: zsh_config
+  blockinfile:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+    block: |
+      export ZSH="$HOME/.oh-my-zsh"
+      ZSH_THEME="robbyrussell"
+      plugins=(
+          git
+          zsh-autosuggestions
+          zsh-syntax-highlighting
+      )
+      source $ZSH/oh-my-zsh.sh
+    create: yes
+    insertbefore: BOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK omz"
+
+- name: Find brew path
+  tags: zsh_config
+  command: which brew
+  register: brew_path
+  changed_when: false
+  check_mode: no
+  failed_when: false
+
+- name: Setup brew path
+  tags: zsh_config
+  when: brew_path.rc == 0
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+    line: 'eval "$({{ brew_path.stdout }} shellenv)"'
+    state: present
+    create: yes
+    validate: 'zsh -n %s'
+

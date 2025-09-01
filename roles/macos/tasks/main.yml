@@ -1,0 +1,8 @@
+---
+- name: Window moving trick
+  shell: "defaults write -g NSWindowShouldDragOnGesture -bool true"
+
+- name: Include Aerospace setup tasks
+  include_tasks: aerospace.yml
+  tags: aerospace_config
+

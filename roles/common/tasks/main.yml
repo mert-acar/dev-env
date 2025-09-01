@@ -1,0 +1,64 @@
+---
+- name: Install common packages
+  community.general.homebrew:
+    name: "{{ item.name }}{{ '@' + item.version if item.version is defined else '' }}"
+    state: present
+    cask: "{{ item.cask | default(false) }}"
+  loop: "{{ packages.common }}"
+  when: is_macos and packages.common is defined
+
+- name: Install macOS-specific packages
+  community.general.homebrew:
+    name: "{{ item.name }}{{ '@' + item.version if item.version is defined else '' }}"
+    state: present
+    cask: "{{ item.cask | default(false) }}"
+  loop: "{{ packages.macos }}"
+  when: is_macos and packages.macos is defined
+
+- name: Install Linux-specific packages
+  community.general.homebrew:
+    name: "{{ item.name }}{{ '@' + item.version if item.version is defined else '' }}"
+    state: present
+    cask: "{{ item.cask | default(false) }}"
+  loop: "{{ packages.linux }}"
+  when: is_ubuntu and packages.linux is defined
+
+- name: ensure scripts directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/scripts"
+    state: directory
+    mode: '0755'
+
+- name: sync scripts
+  copy:
+    src: scripts/
+    dest: "{{ lookup('env', 'HOME') }}/.local/scripts"
+    mode: preserve
+
+- name: Include zsh setup tasks
+  include_tasks: zsh.yml
+  tags: ['zsh', 'zsh_config']
+
+- name: Include fzf setup tasks
+  include_tasks: fzf.yml
+  tags: ['zsh_config', 'fzf']
+
+- name: Include zoxide setup tasks
+  include_tasks: zoxide.yml
+  tags: ['zsh_config', 'zoxide']
+
+- name: Include eza setup tasks
+  include_tasks: eza.yml
+  tags: ['zsh_config', 'eza']
+
+- name: Include neovim setup tasks
+  include_tasks: neovim.yml
+  tags: ['neovim', 'neovim_config', 'zsh_config']
+
+- name: Include tmux setup tasks
+  include_tasks: tmux.yml
+  tags: ['tmux', 'tmux_config']
+
+- name: Include ghostty setup tasks
+  include_tasks: ghostty.yml
+  tags: ghostty_config

@@ -1,0 +1,18 @@
+---
+- name: Configure development environment
+  hosts: localhost
+  become: false
+
+  pre_tasks:
+    - name: Detect OS
+      set_fact:
+        is_macos: "{{ ansible_facts['os_family'] == 'Darwin' }}"
+        is_ubuntu: "{{ ansible_facts['distribution'] == 'Ubuntu' }}"
+      tags: ['always']
+
+  roles:
+    - role: macos
+      when: is_macos
+    - role: ubuntu
+      when: is_ubuntu
+    - role: common

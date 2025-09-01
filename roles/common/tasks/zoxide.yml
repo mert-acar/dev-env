@@ -1,0 +1,17 @@
+---
+- name: Install zoxide
+  tags: zoxide
+  community.general.homebrew:
+    name: zoxide
+    state: present
+
+- name: Add zoxide init
+  tags: ['zsh_config', 'zoxide']
+  blockinfile:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+    block: |
+      eval "$(zoxide init zsh)"
+      alias "cd"="z"
+    create: yes
+    validate: "zsh -n %s"
+

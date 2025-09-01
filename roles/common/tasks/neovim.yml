@@ -1,0 +1,24 @@
+---
+- name: Add nvim alias
+  tags: ['neovim_config', 'zsh_config']
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+    line: 'alias "vi"="nvim"'
+    state: present
+    create: yes
+    validate: "zsh -n %s"
+
+- name: ensure neovim config directory exists
+  tags: ['neovim_config', 'neovim']
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/nvim"
+    state: directory
+    mode: '0755'
+
+- name: sync neovim configuration files
+  tags: ['neovim_config', 'neovim']
+  copy:
+    src: nvim/
+    dest: "{{ lookup('env', 'HOME') }}/.config/nvim/"
+    mode: '0644'
+

@@ -1,0 +1,35 @@
+---
+- name: install fzf dependencies
+  tags: fzf
+  community.general.homebrew:
+    name: "{{ item }}"
+    update_homebrew: true
+    state: present
+    install_options: ["formula"]
+  loop:
+    - fd
+    - bat
+
+- name: Install fzf
+  community.general.homebrew:
+    name: fzf
+    state: present
+
+- name: Add fzf_vim_open function and source
+  tags: ['fzf', 'zsh_config']
+  blockinfile:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+    block: |
+      source <(fzf --zsh)
+      fzf_vim_open() {
+        local file
+        file=$(fd --type f --hidden --exclude .git | fzf --preview 'bat --style=numbers --color=always {}')
+        if [[ -n "$file" ]]; then
+          vi "$file"
+        fi
+      }
+      zle -N fzf_vim_open
+      bindkey '^S' fzf_vim_open
+    create: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK fzf"
+

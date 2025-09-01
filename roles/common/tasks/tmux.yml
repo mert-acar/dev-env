@@ -1,0 +1,20 @@
+---
+- name: install tmux plugin manager (tpm)
+  tags: tmux
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+
+- name: ensure tmux config directory exists
+  tags: ['tmux_config', 'tmux']
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/tmux"
+    state: directory
+    mode: '0755'
+
+- name: sync tmux configuration files
+  tags: ['tmux_config', 'tmux']
+  copy:
+    src: tmux/
+    dest: "{{ lookup('env', 'HOME') }}/.config/tmux/"
+    mode: '0644'

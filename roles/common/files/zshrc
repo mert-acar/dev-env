@@ -1,0 +1,12 @@
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vi'
+else
+  export EDITOR='vi'
+fi
+alias "rr"="rm -rf __pycache__"
+alias "gs"="git status"
+alias "ll"="ls -la"
+alias "a"="source .venv/bin/activate"
+alias "dc"="deactivate"
+
+export PATH="$PATH:$HOME/.local/scripts/:$HOME/go/bin/"
