@@ -31,7 +31,7 @@ return {
                 end,
                 ["pyright"] = function()
                     require('lspconfig').pyright.setup {
-                        capabilities=capabilities,
+                        capabilities = capabilities,
                         settings = {
                             python = {
                                 pythonPath = vim.fn.expand(".venv/bin/python"),
