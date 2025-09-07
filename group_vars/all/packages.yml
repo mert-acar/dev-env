@@ -13,6 +13,7 @@ packages:
     - { name: 'node' }
     - { name: 'ripgrep' }
     - { name: 'ruff' }
+    - { name: 'lazygit' }
     - { name: 'ghostty', cask: true }
     - { name: 'spotify', cask: true }
     - { name: 'firefox', cask: true }
