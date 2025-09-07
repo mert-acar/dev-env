@@ -1,5 +1,5 @@
 vim.g.mapleader = ";"
-vim.keymap.set("n", "<leader>ef", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>ef", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -23,15 +23,15 @@ vim.keymap.set("n", "<leader>c", function() vim.lsp.buf.format({ async = true })
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set(
-  "n",
-  "<leader>rr",
-  "oraise SystemExit<Esc>"
+    "n",
+    "<leader>rr",
+    "oraise SystemExit<Esc>"
 )
 
 vim.keymap.set(
-  "n",
-  "<leader>ee",
-  "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
+    "n",
+    "<leader>ee",
+    "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
 )
 
 -- Stay in indent mode

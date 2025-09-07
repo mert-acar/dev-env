@@ -43,20 +43,6 @@ autocmd("LspAttach", {
 	end,
 })
 
-autocmd("FileType", {
-	group = MacarGroup,
-	pattern = "netrw",
-	callback = function()
-		vim.api.nvim_buf_set_keymap(
-			0,
-			"n",
-			"<leader>cp",
-			':lua vim.fn.setreg("+", vim.fn.expand("%:p"))<CR>',
-			{ noremap = true, silent = true }
-		)
-	end,
-})
-
 autocmd("LspAttach", {
   group = MacarGroup,
   callback = function(args)

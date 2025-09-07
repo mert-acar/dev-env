@@ -28,8 +28,3 @@ vim.opt.updatetime = 50
 vim.opt.fileencoding = "utf-8"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-
--- NETRW config
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
