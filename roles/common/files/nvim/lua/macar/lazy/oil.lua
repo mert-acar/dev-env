@@ -8,6 +8,7 @@ return {
                 columns = { "icon" },
                 keymaps = {
                     ["<C-h>"] = false,
+                    ["<C-c>"] = false,
                     ["gd"] = {
                         desc = "Toggle file detail view",
                         callback = function()
