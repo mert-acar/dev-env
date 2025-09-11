@@ -1,1 +1,1 @@
-require("macar")
+require("config")
