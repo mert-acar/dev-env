@@ -36,6 +36,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, silent = true })
 		end
 
+		local diagnostic_goto = function(next, severity)
+			local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+			severity = severity and vim.diagnostic.severity[severity] or nil
+			return function()
+				go({ severity = severity })
+			end
+		end
+
 		-- LSP keymaps
 		map("n", "<leader>vd", vim.diagnostic.open_float, "Show line diagnostics")
 		map("n", "<leader>vr", vim.lsp.buf.rename, "Rename symbol")
@@ -46,5 +54,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<leader>vn", vim.diagnostic.goto_next, "Next diagnostic")
 		map("n", "<leader>vp", vim.diagnostic.goto_prev, "Previous diagnostic")
 		map("i", "<C-h>", vim.lsp.buf.signature_help, "Signiture help")
+		map("n", "]d", diagnostic_goto(true), "Next Diagnostic")
+		map("n", "[d", diagnostic_goto(false), "Prev Diagnostic")
+		map("n", "]e", diagnostic_goto(true, "ERROR"), "Next Error")
+		map("n", "[e", diagnostic_goto(false, "ERROR"), "Prev Error")
+		map("n", "]w", diagnostic_goto(true, "WARN"), "Next Warning")
+		map("n", "[w", diagnostic_goto(false, "WARN"), "Prev Warning")
 	end,
 })
