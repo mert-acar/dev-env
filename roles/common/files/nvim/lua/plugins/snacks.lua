@@ -163,14 +163,14 @@ return {
 		},
 		-- LSP
 		{
-			"<leader>feS",
+			"<leader>fes",
 			function()
 				Snacks.picker.lsp_symbols()
 			end,
 			desc = "LSP Symbols",
 		},
 		{
-			"<leader>fes",
+			"<leader>feS",
 			function()
 				Snacks.picker.lsp_workspace_symbols()
 			end,
