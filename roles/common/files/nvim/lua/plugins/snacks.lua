@@ -13,11 +13,15 @@ return {
 			},
 		},
 		picker = {
+			matcher = {
+                smartcase = false,
+				ignorecase = false
+			},
 			win = {
 				input = {
 					keys = {
 						-- get out by ESC
-						["<Esc>"] = { "close", mode = { "n", "i" } },
+						-- ["<Esc>"] = { "close", mode = { "n", "i" } },
 					},
 				},
 			},
