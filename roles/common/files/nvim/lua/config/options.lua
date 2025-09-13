@@ -9,7 +9,7 @@ local opt = vim.opt
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically. Requires Neovim >= 0.10.0
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
-opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = "menu,menuone,noinsert,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.expandtab = true -- Use spaces instead of tabs
 opt.fillchars = {

@@ -14,17 +14,16 @@ return {
 		},
 		picker = {
 			matcher = {
-                smartcase = false,
-				ignorecase = false
+				ignorecase = false,
 			},
-			win = {
-				input = {
-					keys = {
-						-- get out by ESC
-						-- ["<Esc>"] = { "close", mode = { "n", "i" } },
-					},
-				},
-			},
+			-- win = {
+			-- 	input = {
+			-- 		keys = {
+			-- 			-- get out by ESC
+			-- 			["<Esc>"] = { "close", mode = { "n", "i" } },
+			-- 		},
+			-- 	},
+			-- },
 		},
 		toggle = { enabled = true },
 		notifier = { enabled = true },
@@ -208,9 +207,9 @@ return {
 					.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
 					:map("<leader>xc")
 				Snacks.toggle.treesitter():map("<leader>xT")
-				Snacks.toggle
-					.option("background", { off = "light", on = "dark", name = "Dark Background" })
-					:map("<leader>xb")
+				-- Snacks.toggle
+				-- 	.option("background", { off = "light", on = "dark", name = "Dark Background" })
+				-- 	:map("<leader>xb")
 				Snacks.toggle.inlay_hints():map("<leader>xh")
 				Snacks.toggle.indent():map("<leader>xg")
 				-- Snacks.toggle.dim():map("<leader>uD")
