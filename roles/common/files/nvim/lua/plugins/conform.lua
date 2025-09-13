@@ -16,6 +16,8 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "ruff" },
+			yaml = { "yq" },
+			json = { "jq" },
 		},
 		default_format_opts = {
 			lsp_format = "fallback",
