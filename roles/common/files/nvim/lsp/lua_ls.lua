@@ -6,7 +6,6 @@ return {
 		"lua",
 	},
 	root_markers = {
-		".git",
 		".luacheckrc",
 		".luarc.json",
 		".luarc.jsonc",

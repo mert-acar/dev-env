@@ -5,8 +5,8 @@ vim.lsp.enable({
 })
 
 vim.diagnostic.config({
-	-- virtual_lines = true,
-	-- virtual_text = true,
+	virtual_lines = false,
+	virtual_text = false,
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
@@ -32,6 +32,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(args)
 		local bufnr = args.buf
+
+		-- Disable the built-in omnifunc to avoid conflicts with completion plugins
+		vim.bo[bufnr].omnifunc = nil
+
+		-- Disable LSP-based completion to avoid conflicts with completion plugins
+		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+		vim.lsp.completion.enable(false, client.id, bufnr)
+
 		-- Define buffer-local keymaps
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, silent = true })
@@ -46,6 +54,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		-- LSP keymaps
+		-- Remove default LSP keymaps to avoid conflicts with custom keymaps
+		vim.keymap.del("n", "grn", { buffer = bufnr })
+		vim.keymap.del("n", "gra", { buffer = bufnr })
+		vim.keymap.del("n", "grr", { buffer = bufnr })
+		vim.keymap.del("n", "gri", { buffer = bufnr })
+		vim.keymap.del("n", "grt", { buffer = bufnr })
+		vim.keymap.del("n", "gO", { buffer = bufnr })
+		vim.keymap.del("i", "<C-S>", { buffer = bufnr })
+		vim.keymap.del("v", "an", { buffer = bufnr })
+		vim.keymap.del("v", "in", { buffer = bufnr })
+
+		-- Set custom LSP keymaps
 		map("n", "<leader>vd", vim.diagnostic.open_float, "Show line diagnostics")
 		map("n", "<leader>vr", vim.lsp.buf.rename, "Rename symbol")
 		map("n", "<leader>va", vim.lsp.buf.code_action, "Code action")

@@ -7,7 +7,6 @@ return {
         "python",
     },
     root_markers = {
-        ".git",
         "Pipfile",
         "pyproject.toml",
         "pyrightconfig.json",
