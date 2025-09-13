@@ -28,7 +28,7 @@ vim.diagnostic.config({
 	},
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
+vim.api.nvim_create_autocmd({ "LspAttach" }, {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(args)
 		local bufnr = args.buf
@@ -55,15 +55,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- LSP keymaps
 		-- Remove default LSP keymaps to avoid conflicts with custom keymaps
-		vim.keymap.del("n", "grn", { buffer = bufnr })
-		vim.keymap.del("n", "gra", { buffer = bufnr })
-		vim.keymap.del("n", "grr", { buffer = bufnr })
-		vim.keymap.del("n", "gri", { buffer = bufnr })
-		vim.keymap.del("n", "grt", { buffer = bufnr })
-		vim.keymap.del("n", "gO", { buffer = bufnr })
-		vim.keymap.del("i", "<C-S>", { buffer = bufnr })
-		vim.keymap.del("v", "an", { buffer = bufnr })
-		vim.keymap.del("v", "in", { buffer = bufnr })
+
+		-- vim.keymap.del("n", "grn", { buffer = bufnr })
+		-- vim.keymap.del("n", "gra", { buffer = bufnr })
+		-- vim.keymap.del("n", "grr", { buffer = bufnr })
+		-- vim.keymap.del("n", "gri", { buffer = bufnr })
+		-- vim.keymap.del("n", "grt", { buffer = bufnr })
+		-- vim.keymap.del("n", "gO", { buffer = bufnr })
+		-- vim.keymap.del("i", "<C-S>", { buffer = bufnr })
+		-- vim.keymap.del("v", "an", { buffer = bufnr })
+		-- vim.keymap.del("v", "in", { buffer = bufnr })
 
 		-- Set custom LSP keymaps
 		map("n", "<leader>vd", vim.diagnostic.open_float, "Show line diagnostics")

@@ -16,14 +16,6 @@ return {
 			matcher = {
 				ignorecase = false,
 			},
-			-- win = {
-			-- 	input = {
-			-- 		keys = {
-			-- 			-- get out by ESC
-			-- 			["<Esc>"] = { "close", mode = { "n", "i" } },
-			-- 		},
-			-- 	},
-			-- },
 		},
 		toggle = { enabled = true },
 		notifier = { enabled = true },

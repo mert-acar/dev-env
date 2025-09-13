@@ -15,7 +15,7 @@ return {
 					nerd_font_variant = "normal",
 				},
 				sources = {
-					default = { "lsp", "path", "snippets", "buffer" },
+					default = { "snippets", "lsp", "path", "buffer" },
 					providers = {
 						cmdline = {
 							min_keyword_length = 2,
@@ -23,16 +23,17 @@ return {
 					},
 				},
 				keymap = {
-                    preset = 'none',
-                    ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
-                    ['<Tab>'] = { 'select_and_accept', 'fallback' },
-                    ['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
-                    ['<C-k>'] = { 'select_prev', 'fallback_to_mappings' },
+					preset = "none",
+					["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+					["<Tab>"] = { "select_and_accept", "fallback" },
+					["<CR>"] = { "select_and_accept", "fallback" },
+					["<C-j>"] = { "select_next", "fallback_to_mappings" },
+					["<C-k>"] = { "select_prev", "fallback_to_mappings" },
 				},
 				completion = {
 					keyword = { range = "full" },
 					accept = { auto_brackets = { enabled = false } },
-                    list = { selection = { preselect = false, auto_insert = true } },
+					list = { selection = { preselect = false, auto_insert = true } },
 					menu = {
 						border = nil,
 						scrolloff = 1,
@@ -59,6 +60,33 @@ return {
 			})
 
 			require("luasnip.loaders.from_vscode").lazy_load()
+
+			local ls = require("luasnip")
+			local s = ls.snippet
+			local t = ls.text_node
+			local i = ls.insert_node
+
+			ls.add_snippets("python", {
+				s("sex", {
+					t("raise SystemExit"),
+				}),
+			})
+
+			ls.add_snippets("python", {
+				s("main", {
+					t('if __name__ == "__main__":'),
+					t({ "", "    " }),
+					i(0),
+				}),
+			})
+
+			ls.add_snippets("go", {
+				s("err", {
+					t("if err != nil {"),
+					t({ "", "    return err" }),
+					t({ "", "}" }),
+				}),
+			})
 		end,
 	},
 }
