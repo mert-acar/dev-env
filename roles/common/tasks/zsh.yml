@@ -41,6 +41,13 @@
     dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     update: yes
 
+- name: Install zsh-vi-mode
+  tags: zsh
+  git:
+    repo: https://github.com/jeffreytse/zsh-vi-mode.git
+    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/plugins/zsh-vi-mode"
+    update: yes
+
 - name: Install zsh-autosuggestions
   tags: zsh
   git:
