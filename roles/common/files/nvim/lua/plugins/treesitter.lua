@@ -66,7 +66,7 @@ return {
                         ["@function.outer"] = "v",    -- charwise
                         ["@conditional.outer"] = "V", -- linewise
                         ["@loop.outer"] = "V",        -- linewise
-                        ["@class.outer"] = "<c-v>",   -- blockwise
+                        ["@class.outer"] = "v",       -- charwise
                     },
                     include_surrounding_whitespace = false,
                 },
