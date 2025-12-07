@@ -65,7 +65,7 @@ return {
                         ["@parameter.inner"] = "v",   -- charwise
                         ["@function.outer"] = "v",    -- charwise
                         ["@conditional.outer"] = "V", -- linewise
-                        ["@loop.outer"] = "V",        -- linewise
+                        ["@loop.outer"] = "v",        -- linewise
                         ["@class.outer"] = "v",       -- charwise
                     },
                     include_surrounding_whitespace = false,
